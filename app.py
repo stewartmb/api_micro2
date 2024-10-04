@@ -4,11 +4,11 @@ import schemas
 
 app = FastAPI()
 
-host_name = "3.232.249.9" # CAMBIAR!!!!!!
-port_number = "8008" 
+host_name = "34.237.90.249" # CAMBIAR!!!!!!
+port_number = "8005" 
 user_name = "root"
 password_db = "utec"
-database_name = "bd_api_python" 
+database_name = "profesores_y_cursos" 
 
 @app.get("/")
 def get_echo_test():
