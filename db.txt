@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS bd_api_python;
-CREATE DATABASE bd_api_python CHARSET utf8mb4;
-USE bd_api_python;
+DROP DATABASE IF EXISTS profesores_y_cursos;
+CREATE DATABASE profesores_y_cursos CHARSET utf8mb4;
+USE profesores_y_cursos;
 
 CREATE TABLE Profesor (
     idProfesor INT(10) NOT NULL AUTO_INCREMENT,
