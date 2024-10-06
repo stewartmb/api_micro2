@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS profesores_y_cursos;
-CREATE DATABASE bd_api_python CHARSET utf8mb4;
+CREATE DATABASE profesores_y_cursos CHARSET utf8mb4;
 USE profesores_y_cursos;
 
 CREATE TABLE Profesor (
