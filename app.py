@@ -4,7 +4,7 @@ import schemas
 
 app = FastAPI()
 
-host_name = "34.237.90.249" # CAMBIAR!!!!!!
+host_name = "34.237.90.249" # CAMBIAR!!!!!!a
 port_number = "8005" 
 user_name = "root"
 password_db = "utec"
@@ -95,15 +95,16 @@ def get_curso(id: int):
     mydb.close()
     return {"Curso": result}
 
-# Anadir un nuevo profesor
+# Anadir un nuevo curso
 @app.post("/cursos")
-def add_profesor(item:schemas.Item2):
+def add_curso(item:schemas.Item2):
     mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)  
-    nombre_curso = item.nomc
-    num_credits = item.numc
+    nombre_curso = item.nombre_curso
+    num_credits = item.num_creditos
+    id_profesor = item.idProfesor
     cursor = mydb.cursor()
-    sql = "INSERT INTO Curso (nombre_curso, num_creditos) VALUES (%s, %s)"
-    val = (nombre_curso,num_credits)
+    sql = "INSERT INTO Curso (nombre_curso, num_creditos, idProfesor) VALUES (%s, %s, %s)"
+    val = (nombre_curso,num_credits,id_profesor)
     cursor.execute(sql, val)
     mydb.commit()
     cursor.close()
@@ -120,3 +121,23 @@ def delete_cursos(id: int):
     cursor.close()
     mydb.close()
     return {"message": "Curso deleted successfully"}
+
+# Get un curso by ID, pero solo devuelve idCurso e idProfesor
+# DTO :D
+@app.get("/cursos/{id}/version2")
+def get_curso_simplificado(id: int):
+    # Conexión a la base de datos
+    mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)
+    # Consulta para obtener solo idCurso e idProfesor
+    cursor = mydb.cursor()
+    cursor.execute(f"SELECT idCurso, idProfesor FROM Curso WHERE idCurso = {id}")
+    # Obtener el resultado de la consulta
+    result = cursor.fetchone()
+    cursor.close()
+    mydb.close()
+    # Si no se encuentra un curso con ese ID, retornar un mensaje de error
+    if result is None:
+        return {"message": f"Curso con id {id} no encontrado"}
+    
+    # Devolver el idCurso e idProfesor en formato JSON
+    return {"idCurso": result[0], "idProfesor": result[1]}
