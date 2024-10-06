@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS profesores_y_cursos;
-CREATE DATABASE profesores_y_cursos CHARSET utf8mb4;
-USE profesores_y_cursos;
+DROP DATABASE IF EXISTS bd_api_python;
+CREATE DATABASE bd_api_python CHARSET utf8mb4;
+USE bd_api_python;
 
 CREATE TABLE Profesor (
     idProfesor INT(10) NOT NULL AUTO_INCREMENT,
@@ -15,8 +15,11 @@ CREATE TABLE Curso (
     idCurso INT(10) NOT NULL AUTO_INCREMENT,
     nombre_curso VARCHAR(25) NOT NULL,
     num_creditos INT(5) NOT NULL,
-    PRIMARY KEY (idCurso)
+    idProfesor INT(10),
+    PRIMARY KEY (idCurso),
+    FOREIGN KEY (idProfesor) REFERENCES Profesor(idProfesor)
 );
+
 
 
 INSERT INTO Profesor(nombre, especialidad, dni, telefono) VALUES('Jorge', 'Cloud', '74037295', '994758814');
@@ -24,8 +27,8 @@ INSERT INTO Profesor(nombre, especialidad, dni, telefono) VALUES('Rodrigo', 'Alg
 INSERT INTO Profesor(nombre, especialidad, dni, telefono) VALUES('Stewart', 'Metodos', '76452819', '909405356');
 
 
-INSERT INTO Curso (nombre_curso, num_creditos) VALUES('Cloud', 3);
-INSERT INTO Curso (nombre_curso, num_creditos) VALUES('Algoritmos', 4);
-INSERT INTO Curso (nombre_curso, num_creditos) VALUES('Metodos', 3);
+INSERT INTO Curso (nombre_curso, num_creditos, idProfesor) VALUES('Cloud', 3, 1);
+INSERT INTO Curso (nombre_curso, num_creditos, idProfesor) VALUES('Algoritmos', 4, 2);
+INSERT INTO Curso (nombre_curso, num_creditos, idProfesor) VALUES('Metodos', 3, 3);
 
 commit;
