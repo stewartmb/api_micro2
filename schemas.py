@@ -6,5 +6,6 @@ class Item(BaseModel):
     telefono: str
 
 class Item2(BaseModel):
-    nomc: str
-    numc: int
+    nombre_curso: str
+    num_creditos: int
+    idProfesor: int
