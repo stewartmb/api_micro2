@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM python:3.12-slim
 WORKDIR /programas/api_micro2
 RUN pip3 install "fastapi[standard]"
 RUN pip3 install pydantic
